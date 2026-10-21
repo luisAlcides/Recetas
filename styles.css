@@ -219,3 +219,7 @@ dialog[open] { animation: up .22s ease-out; }
 }
 .tabs button span { font-size: 22px; line-height: 1; }
 .tabs button[aria-current="page"] { color: var(--pino); }
+
+/* Netlify (plan gratis) pone un aviso "Powered by Netlify" fijo abajo a la
+   derecha que tapa la pestaña Compras. */
+#nl-badge-frame { display: none !important; }
