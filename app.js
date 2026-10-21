@@ -1,7 +1,7 @@
 import { DISHES, INGREDIENTS } from './data/menu.js';
 import { WEEKS_IN_CYCLE, addDays, fromISO, mondayOf, rangeDates, slotFor, toISO } from './lib/cycle.js';
-import { MEAL_TYPE, PORTIONS, dishFor, swapKey } from './lib/plan.js';
-import { checksKey, formatQty, shoppingList } from './lib/shopping.js';
+import { MEAL_TYPE, PER_MEAL, dishFor, swapKey } from './lib/plan.js';
+import { checksKey, recipeQty, shoppingList } from './lib/shopping.js';
 import { createStore } from './lib/store.js';
 
 let storage = null;
@@ -149,17 +149,19 @@ function sheetTop(title) {
 function showRecipe(date, meal) {
   const { week, day } = slotFor(date, start());
   const dish = DISHES[dishFor(week, day, meal, state().swaps)];
-  const portions = PORTIONS[MEAL_TYPE[meal]];
-  const ings = dish.items.map(({ ing, qty }) => {
-    const { name, unit, step } = INGREDIENTS[ing];
-    return `<li><span>${name}</span><span>${formatQty(qty * portions, unit, step)}</span></li>`;
+  const rows = dish.items.map(({ ing, qty }) => {
+    const { name, unit, whole } = INGREDIENTS[ing];
+    return `<tr><th scope="row">${name}</th><td>${recipeQty(qty, unit, whole)}</td><td>${recipeQty(qty * PER_MEAL, unit, whole)}</td></tr>`;
   }).join('');
   openSheet(`
     ${sheetTop(dish.name)}
     <p>${dish.sides}</p>
     <h3>Ingredientes</h3>
-    <ul class="ing">${ings}</ul>
-    <p class="note">${meal === 'l' ? 'Alcanza para almuerzo y cena de los 3.' : 'Alcanza para el desayuno de los 3.'} Sal y especias al gusto.</p>
+    <table class="ing">
+      <thead><tr><th scope="col"></th><th scope="col">Para 1</th><th scope="col">Para 3</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <p class="note">"Para 3" ya incluye la porción más grande de los dos del gym y la más pequeña del adulto mayor.${meal === 'l' ? ' Si cocinás también para la cena, hacé el doble.' : ''} Sal y especias al gusto.</p>
     <h3>Preparación</h3>
     <ol>${dish.steps.map((s) => `<li>${s}</li>`).join('')}</ol>
     <h3>💪 Para los del gym</h3>

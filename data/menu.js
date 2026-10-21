@@ -11,13 +11,14 @@ export const CATEGORIES = {
 };
 
 // unit: unidad en que se compra · step: lo mínimo que se pide
+// whole: en la receta va en números enteros (no se parte)
 export const INGREDIENTS = {
   pollo: { name: 'Pollo (pechuga o muslo)', cat: 'proteinas', unit: 'lb', step: 0.5 },
   res: { name: 'Carne de res (posta)', cat: 'proteinas', unit: 'lb', step: 0.5 },
   res_molida: { name: 'Carne de res molida', cat: 'proteinas', unit: 'lb', step: 0.5 },
   res_hueso: { name: 'Carne de res para sopa (con hueso)', cat: 'proteinas', unit: 'lb', step: 0.5 },
   cerdo: { name: 'Carne de cerdo (lomo o posta)', cat: 'proteinas', unit: 'lb', step: 0.5 },
-  huevo: { name: 'Huevos', cat: 'proteinas', unit: 'unid', step: 1 },
+  huevo: { name: 'Huevos', cat: 'proteinas', unit: 'unid', step: 1, whole: true },
   sardina: { name: 'Sardina en salsa de tomate', cat: 'proteinas', unit: 'lata', step: 1 },
 
   queso: { name: 'Queso seco', cat: 'lacteos', unit: 'lb', step: 0.25 },
@@ -26,7 +27,7 @@ export const INGREDIENTS = {
 
   frijoles: { name: 'Frijoles rojos', cat: 'granos', unit: 'lb', step: 0.5 },
   arroz: { name: 'Arroz', cat: 'granos', unit: 'lb', step: 0.5 },
-  tortilla: { name: 'Tortillas', cat: 'granos', unit: 'unid', step: 1 },
+  tortilla: { name: 'Tortillas', cat: 'granos', unit: 'unid', step: 1, whole: true },
   avena: { name: 'Avena en hojuelas', cat: 'granos', unit: 'lb', step: 0.5 },
   pinolillo: { name: 'Pinolillo', cat: 'granos', unit: 'lb', step: 0.25 },
   espagueti: { name: 'Espagueti', cat: 'granos', unit: 'lb', step: 0.5 },
@@ -44,11 +45,11 @@ export const INGREDIENTS = {
   papa: { name: 'Papa', cat: 'verduras', unit: 'lb', step: 0.5 },
   platano_verde: { name: 'Plátano verde', cat: 'verduras', unit: 'unid', step: 1 },
   maduro: { name: 'Plátano maduro', cat: 'verduras', unit: 'unid', step: 1 },
-  guineo: { name: 'Guineo cuadrado (verde)', cat: 'verduras', unit: 'unid', step: 1 },
+  guineo: { name: 'Guineo cuadrado (verde)', cat: 'verduras', unit: 'unid', step: 1, whole: true },
   culantro: { name: 'Culantro', cat: 'verduras', unit: 'manojo', step: 1 },
   ajo: { name: 'Ajo', cat: 'verduras', unit: 'cabeza', step: 1 },
 
-  banano: { name: 'Banano', cat: 'frutas', unit: 'unid', step: 1 },
+  banano: { name: 'Banano', cat: 'frutas', unit: 'unid', step: 1, whole: true },
   papaya: { name: 'Papaya', cat: 'frutas', unit: 'unid', step: 1 },
   aguacate: { name: 'Aguacate', cat: 'frutas', unit: 'unid', step: 1 },
   naranja: { name: 'Naranja', cat: 'frutas', unit: 'unid', step: 1 },

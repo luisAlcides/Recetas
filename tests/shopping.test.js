@@ -82,3 +82,31 @@ test('checksKey: las casillas duran toda la semana (no se borran cada día)', as
   assert.notEqual(checksKey('hoy', lun), checksKey('hoy', mar));
   assert.notEqual(checksKey('semana', lun), checksKey('proxima', lun));
 });
+
+test('recipeQty: medidas de cocina para una receta', async () => {
+  const { recipeQty } = await import('../lib/shopping.js');
+  assert.equal(recipeQty(0.35, 'lb'), '6 oz');
+  assert.equal(recipeQty(1.17, 'lb'), '1 ¼ lb');
+  assert.equal(recipeQty(0.06, 'lb'), '1 oz');
+  assert.equal(recipeQty(2, 'unid'), '2');
+  assert.equal(recipeQty(0.5, 'unid'), '½');
+  assert.equal(recipeQty(0.15, 'unid'), '¼');
+  assert.equal(recipeQty(1.68, 'unid'), '1 ¾');
+  assert.equal(recipeQty(0.25, 'litro'), '1 taza');
+  assert.equal(recipeQty(0.84, 'litro'), '3 ½ tazas');
+  assert.equal(recipeQty(0.01, 'litro'), '1 cda');
+  assert.equal(recipeQty(0.05, 'cabeza'), '1 diente');
+  assert.equal(recipeQty(0.17, 'cabeza'), '2 dientes');
+  assert.equal(recipeQty(0.1, 'manojo'), 'unas ramitas');
+  assert.equal(recipeQty(0.5, 'manojo'), '½ manojo');
+  assert.equal(recipeQty(0.33, 'lata'), '⅓ lata');
+  assert.equal(recipeQty(1.1, 'lata'), '1 lata');
+  assert.equal(recipeQty(2.2, 'lata'), '2 ¼ latas');
+});
+
+test('recipeQty: huevos y tortillas van enteros (hacia arriba)', async () => {
+  const { recipeQty } = await import('../lib/shopping.js');
+  assert.equal(recipeQty(3.35, 'unid', true), '4');
+  assert.equal(recipeQty(6.7, 'unid', true), '7');
+  assert.equal(recipeQty(1, 'unid', true), '1');
+});

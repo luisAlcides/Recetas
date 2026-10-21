@@ -1,6 +1,6 @@
 // Guarda la app en el teléfono para que funcione sin internet.
 // Cambiá VERSION cada vez que subás cambios para que los teléfonos se actualicen.
-const VERSION = 'menu-v3';
+const VERSION = 'menu-v4';
 const FILES = [
   './',
   'index.html',
