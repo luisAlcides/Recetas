@@ -40,3 +40,10 @@ test('todo almuerzo lleva verdura y todo plato lleva proteína', () => {
     assert.ok(dish.items.some((i) => INGREDIENTS[i.ing].cat === 'proteinas' || INGREDIENTS[i.ing].cat === 'lacteos'), id);
   }
 });
+
+test('un cambio guardado con un plato que ya no existe vuelve al original', async () => {
+  const { dishFor } = await import('../lib/plan.js');
+  assert.equal(dishFor(0, 0, 'l', { '0-0-l': 'plato_borrado' }), WEEKS[0][0].l);
+  assert.equal(dishFor(0, 0, 'l', { '0-0-l': WEEKS[0][0].b }), WEEKS[0][0].l, 'tipo equivocado');
+  assert.equal(dishFor(0, 0, 'l', null), WEEKS[0][0].l);
+});

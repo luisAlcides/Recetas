@@ -27,16 +27,29 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Primero la red (para recibir cambios), y si no hay señal, lo guardado.
+// Primero la red (para recibir cambios). Si no hay señal o tarda más de
+// 3 segundos, se usa lo guardado.
+const TIMEOUT_MS = 3000;
+
+function fromNetwork(request) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('lento')), TIMEOUT_MS);
+    fetch(request).then((res) => {
+      clearTimeout(timer);
+      if (!res.ok) return reject(new Error(`HTTP ${res.status}`));
+      const copy = res.clone();
+      caches.open(VERSION).then((c) => c.put(request, copy));
+      resolve(res);
+    }, (err) => { clearTimeout(timer); reject(err); });
+  });
+}
+
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET' || new URL(e.request.url).origin !== location.origin) return;
   e.respondWith(
-    fetch(e.request)
-      .then((res) => {
-        const copy = res.clone();
-        caches.open(VERSION).then((c) => c.put(e.request, copy));
-        return res;
-      })
-      .catch(() => caches.match(e.request, { ignoreSearch: true }).then((r) => r || caches.match('index.html'))),
+    fromNetwork(e.request).catch(async () => {
+      const cached = await caches.match(e.request, { ignoreSearch: true });
+      return cached || (await caches.match('index.html')) || fetch(e.request);
+    }),
   );
 });

@@ -68,3 +68,17 @@ test('formatQty redondea hacia arriba a lo que se puede pedir', () => {
   assert.equal(formatQty(0.7, 'litro', 0.5), '1 litro');
   assert.equal(formatQty(2.6, 'litro', 0.5), '3 litros');
 });
+
+test('checksKey: las casillas duran toda la semana (no se borran cada día)', async () => {
+  const { checksKey } = await import('../lib/shopping.js');
+  const lun = fromISO('2026-10-19');
+  const mar = fromISO('2026-10-20');
+  const dom = fromISO('2026-10-25');
+  for (const k of ['semana', 'proxima', 'quincena']) {
+    assert.equal(checksKey(k, lun), checksKey(k, mar), k);
+    assert.equal(checksKey(k, lun), checksKey(k, dom), k);
+    assert.notEqual(checksKey(k, lun), checksKey(k, fromISO('2026-10-26')), k);
+  }
+  assert.notEqual(checksKey('hoy', lun), checksKey('hoy', mar));
+  assert.notEqual(checksKey('semana', lun), checksKey('proxima', lun));
+});

@@ -35,3 +35,8 @@ test('guarda y lee cambios y casillas', () => {
   s.save({ start: '2026-10-19', swaps: { '0-0-l': 'salpicon' }, checks: { 'semana|2026-10-21': ['pollo'] } });
   assert.deepEqual(createStore(mem).load().swaps, { '0-0-l': 'salpicon' });
 });
+
+test('estado con forma inválida se corrige', () => {
+  const s = createStore(memory({ 'menu-semanal': JSON.stringify({ start: 5, swaps: null, checks: [] }) }));
+  assert.deepEqual(s.load(), { start: null, swaps: {}, checks: {} });
+});

@@ -1,7 +1,7 @@
 import { DISHES, INGREDIENTS } from './data/menu.js';
 import { WEEKS_IN_CYCLE, addDays, fromISO, mondayOf, rangeDates, slotFor, toISO } from './lib/cycle.js';
 import { MEAL_TYPE, PORTIONS, dishFor, swapKey } from './lib/plan.js';
-import { formatQty, shoppingList } from './lib/shopping.js';
+import { checksKey, formatQty, shoppingList } from './lib/shopping.js';
 import { createStore } from './lib/store.js';
 
 let storage = null;
@@ -34,7 +34,7 @@ function mealBlock(date, meal) {
   const { week, day } = slotFor(date, start());
   const id = dishFor(week, day, meal, state().swaps);
   const dish = DISHES[id];
-  const swapped = state().swaps[swapKey(week, day, meal)] !== undefined;
+  const swapped = id !== dishFor(week, day, meal, {});
   const when = meal === 'b' ? '☀️ Desayuno' : '🍲 Almuerzo y cena';
   return `
     <section class="meal ${meal}" aria-label="${when}">
@@ -101,19 +101,15 @@ function renderWeek() {
 
 // ───────── Compras ─────────
 
-function checksKey(kind, dates) {
-  return `${kind}|${toISO(dates[0])}`;
-}
-
 function pruneChecks() {
-  const live = new Set(RANGES.map(([k]) => checksKey(k, rangeDates(k, today()))));
+  const live = new Set(RANGES.map(([k]) => checksKey(k, today())));
   const checks = Object.fromEntries(Object.entries(state().checks).filter(([k]) => live.has(k)));
   update({ checks });
 }
 
 function renderShopping() {
   const dates = rangeDates(ui.range, today());
-  const key = checksKey(ui.range, dates);
+  const key = checksKey(ui.range, today());
   const checked = new Set(state().checks[key] ?? []);
   const list = shoppingList(dates, start(), state().swaps);
   const total = list.reduce((n, g) => n + g.items.length, 0);
@@ -175,7 +171,7 @@ function showSwap(date, meal) {
   const key = swapKey(week, day, meal);
   const currentId = dishFor(week, day, meal, state().swaps);
   const current = DISHES[currentId];
-  const swapped = state().swaps[key] !== undefined;
+  const swapped = currentId !== dishFor(week, day, meal, {});
   const alts = Object.entries(DISHES)
     .filter(([id, d]) => d.type === MEAL_TYPE[meal] && id !== currentId)
     .sort(([, a], [, b]) => (b.protein === current.protein) - (a.protein === current.protein) || a.name.localeCompare(b.name, 'es'));
@@ -238,7 +234,7 @@ document.addEventListener('click', (e) => {
     render();
   } else if (act === 'range') { ui.range = el.dataset.range; render(); }
   else if (act === 'uncheck-all') {
-    const key = checksKey(ui.range, rangeDates(ui.range, today()));
+    const key = checksKey(ui.range, today());
     const checks = { ...state().checks };
     delete checks[key];
     update({ checks });
@@ -249,7 +245,7 @@ document.addEventListener('click', (e) => {
 view.addEventListener('change', (e) => {
   const box = e.target.closest('input[data-act="check"]');
   if (!box) return;
-  const key = checksKey(ui.range, rangeDates(ui.range, today()));
+  const key = checksKey(ui.range, today());
   const set = new Set(state().checks[key] ?? []);
   box.checked ? set.add(box.dataset.ing) : set.delete(box.dataset.ing);
   update({ checks: { ...state().checks, [key]: [...set] } });
