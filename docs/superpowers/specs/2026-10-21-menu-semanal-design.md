@@ -80,7 +80,7 @@ Barra de pestañas fija abajo: **Hoy · Semana · Compras**.
   lleva verdura (chayote, ayote, repollo, zanahoria, pipián, tomate, pepino, etc.).
 - Base de ingredientes locales: frijoles rojos, arroz, maíz o tortilla, avena,
   pinolillo, huevo, pollo, res, cerdo, queso seco, cuajada, leche, crema (poca),
-  plátano verde y maduro, guineo, yuca, papa, quequisque, chayote, ayote, pipián,
+  plátano verde y maduro, guineo, yuca, papa, chayote, ayote, pipián,
   repollo, zanahoria, tomate, cebolla, chiltoma, ajo, culantro, limón, naranja,
   mango, papaya, banano, aguacate y café.
 - Criterio nutricional (decisión del diseñador): proteína en cada comida; tortilla,

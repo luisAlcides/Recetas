@@ -47,3 +47,8 @@ test('un cambio guardado con un plato que ya no existe vuelve al original', asyn
   assert.equal(dishFor(0, 0, 'l', { '0-0-l': WEEKS[0][0].b }), WEEKS[0][0].l, 'tipo equivocado');
   assert.equal(dishFor(0, 0, 'l', null), WEEKS[0][0].l);
 });
+
+test('nada de quequisque (no se consigue en El Jícaro)', () => {
+  const text = JSON.stringify({ INGREDIENTS, DISHES });
+  assert.ok(!/quequisque/i.test(text));
+});

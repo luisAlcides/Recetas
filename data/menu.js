@@ -42,7 +42,6 @@ export const INGREDIENTS = {
   pipian: { name: 'Pipián', cat: 'verduras', unit: 'unid', step: 1 },
   yuca: { name: 'Yuca', cat: 'verduras', unit: 'lb', step: 0.5 },
   papa: { name: 'Papa', cat: 'verduras', unit: 'lb', step: 0.5 },
-  quequisque: { name: 'Quequisque', cat: 'verduras', unit: 'lb', step: 0.5 },
   platano_verde: { name: 'Plátano verde', cat: 'verduras', unit: 'unid', step: 1 },
   maduro: { name: 'Plátano maduro', cat: 'verduras', unit: 'unid', step: 1 },
   guineo: { name: 'Guineo cuadrado (verde)', cat: 'verduras', unit: 'unid', step: 1 },
@@ -198,10 +197,10 @@ export const DISHES = {
   sopa_frijoles: {
     type: 'almuerzo', protein: 'frijoles',
     name: 'Sopa de frijoles con huevo y queso',
-    sides: 'Quequisque · 1 tortilla',
+    sides: 'Papa · 1 tortilla',
     gym: '+1 huevo y más queso',
-    items: items({ frijoles: 0.12, huevo: 1, queso: 0.05, quequisque: 0.2, cebolla: 0.2, chiltoma: 0.2, culantro: 0.1, ajo: 0.05, tortilla: 1 }),
-    steps: ['Cociná los frijoles con ajo y cebolla (o usá el caldo de los frijoles de la semana).', 'Agregá el quequisque en trozos, la chiltoma y culantro; cociná 15 minutos.', 'Al final, echá los huevos enteros para que se cuezan en el caldo.', 'Serví con queso seco desmoronado y tortilla.'],
+    items: items({ frijoles: 0.12, huevo: 1, queso: 0.05, papa: 0.2, cebolla: 0.2, chiltoma: 0.2, culantro: 0.1, ajo: 0.05, tortilla: 1 }),
+    steps: ['Cociná los frijoles con ajo y cebolla (o usá el caldo de los frijoles de la semana).', 'Agregá la papa en trozos, la chiltoma y culantro; cociná 15 minutos.', 'Al final, echá los huevos enteros para que se cuezan en el caldo.', 'Serví con queso seco desmoronado y tortilla.'],
   },
   bistec_encebollado: {
     type: 'almuerzo', protein: 'res',
@@ -286,10 +285,10 @@ export const DISHES = {
   sopa_pollo: {
     type: 'almuerzo', protein: 'pollo',
     name: 'Sopa de pollo con verduras',
-    sides: 'Papa, chayote, zanahoria y quequisque en la sopa · 1 tortilla',
-    gym: 'Pieza extra de pollo; poco quequisque',
-    items: items({ pollo: 0.4, papa: 0.15, chayote: 0.5, zanahoria: 0.5, quequisque: 0.15, cebolla: 0.25, chiltoma: 0.25, culantro: 0.15, ajo: 0.05, tortilla: 1, limon: 0.25 }),
-    steps: ['Cociná el pollo en agua con sal, ajo y cebolla 25 minutos.', 'Agregá papa y quequisque; a los 10 minutos, chayote y zanahoria.', 'Terminá con chiltoma y culantro. Serví con limón y tortilla.'],
+    sides: 'Papa, yuca, chayote y zanahoria en la sopa · 1 tortilla',
+    gym: 'Pieza extra de pollo; poca yuca y papa',
+    items: items({ pollo: 0.4, papa: 0.15, chayote: 0.5, zanahoria: 0.5, yuca: 0.15, cebolla: 0.25, chiltoma: 0.25, culantro: 0.15, ajo: 0.05, tortilla: 1, limon: 0.25 }),
+    steps: ['Cociná el pollo en agua con sal, ajo y cebolla 25 minutos.', 'Agregá papa y yuca; a los 10 minutos, chayote y zanahoria.', 'Terminá con chiltoma y culantro. Serví con limón y tortilla.'],
   },
   pollo_tortillas: {
     type: 'almuerzo', protein: 'pollo',
