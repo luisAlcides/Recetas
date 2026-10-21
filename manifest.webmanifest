@@ -1,0 +1,15 @@
+{
+  "name": "Menú de la casa",
+  "short_name": "Menú",
+  "description": "Qué cocinar hoy: desayuno y almuerzo, con lista de compras.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f5ef",
+  "theme_color": "#1f4d3a",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Menú de la casa</title>
+  <meta name="description" content="Qué cocinar hoy: desayuno y almuerzo, con lista de compras.">
+  <meta name="theme-color" content="#1f4d3a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="view" tabindex="-1"></main>
+
+  <nav class="tabs" aria-label="Secciones">
+    <button data-tab="hoy" aria-current="page"><span aria-hidden="true">🍳</span>Hoy</button>
+    <button data-tab="semana"><span aria-hidden="true">📅</span>Semana</button>
+    <button data-tab="compras"><span aria-hidden="true">🛒</span>Compras</button>
+  </nav>
+
+  <dialog id="sheet" aria-labelledby="sheet-title"></dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
