@@ -119,8 +119,11 @@ Barra de pestañas fija abajo: **Hoy · Semana · Compras**.
 - Estado guardado en `localStorage`: fecha de inicio, platos cambiados y casillas
   de compras. Si el almacenamiento falla, la app igual muestra el menú.
 - Todo en español. Respeta el modo oscuro del teléfono.
-- Hospedaje: GitHub Pages en el repo `luisAlcides/Recetas`, que ya existe. Antes de
-  publicar se le confirma al usuario.
+- Hospedaje: **Netlify** (decidido por el usuario; el usuario lo sube). Sitio
+  estático servido desde la raíz del repo, sin build. Incluye `netlify.toml` con
+  `publish = "."` y cabeceras para que `sw.js` y el manifest no queden en caché
+  (`Cache-Control: no-cache`), así las actualizaciones llegan al teléfono. Todas
+  las rutas son relativas.
 
 ## Lo que queda a criterio del constructor
 
